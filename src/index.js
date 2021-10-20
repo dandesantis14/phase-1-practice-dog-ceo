@@ -5,7 +5,8 @@ window.addEventListener('DOMContentLoaded',() => {
     fetchDogBreeds()
 })
 
-//for dog images
+//-----------INFORMATION REQUESTS-----------\\
+//For dog images
 const fetchDogPictures = () => {
     fetch("https://dog.ceo/api/breeds/image/random/4")
         .then (response => response.json())
@@ -26,7 +27,7 @@ const fetchDogBreeds = () => {
         })
 }
 
-//For displaying filtered breeds list
+//For filtered breeds list
 const fetchDogBreedsFiltered = (filterValue) => {
     fetch ('https://dog.ceo/api/breeds/list/all')
         .then (res => res.json())
@@ -39,6 +40,8 @@ const fetchDogBreedsFiltered = (filterValue) => {
         })
 }
 
+//-----------ELEMENT CREATION, MODIFICATION, DELETION-----------\\
+
 // Makes image element to be appended to DOM
 const makeImg = img => {
     let newImg = document.createElement('img');
@@ -46,7 +49,7 @@ const makeImg = img => {
     addEl(newImg);
 }
 
-// Appends any elements passed to it to the dog container of document
+// Appends images passed to it to dog container
 const addEl = el => document.getElementById('dog-image-container').append(el);
 
 // Adds listener for filter change
@@ -56,20 +59,6 @@ const dropdownListener = () => {
         const filterValue = breedDropdown.value;
         filterBreeds(filterValue);
     })
-}
-
-// Clears existing breed list for filtering
-const removeList = (parent) => {
-    while (parent.firstChild){
-        parent.removeChild(parent.firstChild);
-    }
-}
-
-// Creates new list based on passed filter value
-const filterBreeds = (filterValue) => {
-    const parent = document.getElementById('dog-breeds');
-    removeList(parent);
-    fetchDogBreedsFiltered(filterValue)   
 }
 
 // Creates list elements
@@ -86,6 +75,20 @@ const addColorChange = () => {
         el.addEventListener('click', () => {
             el.style.color = 'teal'}) 
     })
+}
+
+// Clears existing breed list for filtering
+const removeList = (parent) => {
+    while (parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+}
+
+// Creates new list based on passed filter value
+const filterBreeds = (filterValue) => {
+    const parent = document.getElementById('dog-breeds');
+    removeList(parent);
+    fetchDogBreedsFiltered(filterValue)   
 }
 
 
