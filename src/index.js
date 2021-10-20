@@ -35,9 +35,7 @@ const fetchDogBreedsFiltered = (filterValue) => {
             const filteredBreeds = Object.keys(json.message).filter(el => el.charAt(0) === filterValue)
             filteredBreeds.forEach(el => makeList(el))
         })
-        .then (() => {
-            addColorChange()
-        })
+        .then (() => addColorChange())
 }
 
 //-----------ELEMENT CREATION, MODIFICATION, DELETION-----------\\
